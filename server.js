@@ -24,14 +24,14 @@ app.get("/timestamp", function (req, res) {
 
 //
 
-app.get("/api/timestamp", function (req, res) {
+app.get("/api", function (req, res) {
   res.json({ 
     unix: new Date().getTime(), 
     utc: new Date().toUTCString() 
   });
 });
 //
-app.get("/api/timestamp/:date_string", function (req, res) {
+app.get("/api/:date_string", function (req, res) {
   const time = req.params.date_string;
   if (parseInt(time) > 10000) {
     let unixTime = new Date(parseInt(time));
