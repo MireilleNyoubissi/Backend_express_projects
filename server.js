@@ -22,20 +22,20 @@ app.get("/timestamp", function (req, res) {
   res.sendFile(__dirname + "/views/timestamp.html");
 });
 
-app.get("/timestamp", function (req, res) {
+app.get("/RequestHeaderParser", function (req, res) {
   res.sendFile(__dirname + "/views/RequestHeaderParser.html");
 });
 
 //
 
-app.get("/api", function (req, res) {
+app.get("/api/timestamp", function (req, res) {
   res.json({ 
     unix: new Date().getTime(), 
     utc: new Date().toUTCString() 
   });
 });
 //
-app.get("/api/:date_string", function (req, res) {
+app.get("/api/timestamp/:date_string", function (req, res) {
   const time = req.params.date_string;
   if (parseInt(time) > 10000) {
     let unixTime = new Date(parseInt(time));
@@ -54,13 +54,6 @@ app.get("/api/:date_string", function (req, res) {
   res.json({ error: "Invalid Date" });
 });
 
-app.get("/api/whoami", function (req, res) {
-  res.json({
-    ipaddress: req.headers["x-forwarded-for"],
-    language: req.headers["accept-language"],
-    software: req.headers["user-agent"],
-  });
-});
 app.get("/api/whoami", function (req, res) {
   res.json({
     ipaddress: req.headers["x-forwarded-for"],
