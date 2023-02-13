@@ -22,6 +22,10 @@ app.get("/timestamp", function (req, res) {
   res.sendFile(__dirname + "/views/timestamp.html");
 });
 
+app.get("/timestamp", function (req, res) {
+  res.sendFile(__dirname + "/views/RequestHeaderParser.html");
+});
+
 //
 
 app.get("/api", function (req, res) {
@@ -50,7 +54,22 @@ app.get("/api/:date_string", function (req, res) {
   res.json({ error: "Invalid Date" });
 });
 
-// listen for requests :)
+app.get("/api/whoami", function (req, res) {
+  res.json({
+    ipaddress: req.headers["x-forwarded-for"],
+    language: req.headers["accept-language"],
+    software: req.headers["user-agent"],
+  });
+});
+app.get("/api/whoami", function (req, res) {
+  res.json({
+    ipaddress: req.headers["x-forwarded-for"],
+    language: req.headers["accept-language"],
+    software: req.headers["user-agent"],
+  });
+});
+
+//Request Header Parser Microservice
 let listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
